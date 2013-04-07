@@ -1,0 +1,3 @@
+[submodule "jit"]
+	path = jit
+	url = https://github.com/philogb/jit.git
