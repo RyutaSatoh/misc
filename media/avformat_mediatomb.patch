@@ -1,12 +1,13 @@
 --- media/ffmpeg_handler.cc	2013-05-18 17:00:15.000000000 +0900
-+++ mediatomb-0.12.1/src/metadata/ffmpeg_handler.cc	2013-05-18 17:00:46.000000000 +0900
++++ mediatomb-0.12.1/src/metadata/ffmpeg_handler.cc	2013-05-18 17:17:11.000000000 +0900
 @@ -288,8 +288,9 @@
      av_register_all();
  
      // Open video file
-+    AvDirectory *opts = NULL;
-     if (av_open_input_file(&pFormatCtx, 
+-    if (av_open_input_file(&pFormatCtx, 
 -                          item->getLocation().c_str(), NULL, 0, NULL) != 0)
++    AVDirectory *opts = NULL;
++    if (avformat_open_input(&pFormatCtx, 
 +                          item->getLocation().c_str(), NULL, &opts) != 0)
          return; // Couldn't open file
  
