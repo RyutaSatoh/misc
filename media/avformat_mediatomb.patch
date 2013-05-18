@@ -1,12 +1,23 @@
 --- media/ffmpeg_handler.cc	2013-05-18 17:00:15.000000000 +0900
-+++ mediatomb-0.12.1/src/metadata/ffmpeg_handler.cc	2013-05-18 17:17:11.000000000 +0900
++++ mediatomb-0.12.1/src/metadata/ffmpeg_handler.cc	2013-05-18 17:27:38.000000000 +0900
+@@ -107,8 +107,8 @@
+ 		return;
+ 	for (const mapping_t *m = mapping; m->avname != NULL; m++)
+ 	{
+-		AVMetadataTag *tag = NULL;
+-		tag = av_metadata_get(pFormatCtx->metadata, m->avname, NULL, 0);
++		AVDictionaryEntry *tag = NULL;
++		tag = av_dict_get(pFormatCtx->metadata, m->avname, NULL, 0);
+ 		if (tag && tag->value && tag->value[0])
+ 		{
+ 			log_debug("Added metadata %s: %s\n", m->avname, tag->value);
 @@ -288,8 +288,9 @@
      av_register_all();
  
      // Open video file
 -    if (av_open_input_file(&pFormatCtx, 
 -                          item->getLocation().c_str(), NULL, 0, NULL) != 0)
-+    AVDirectory *opts = NULL;
++    AVDictionary *opts = NULL;
 +    if (avformat_open_input(&pFormatCtx, 
 +                          item->getLocation().c_str(), NULL, &opts) != 0)
          return; // Couldn't open file
