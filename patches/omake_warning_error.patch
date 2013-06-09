@@ -4,8 +4,8 @@
  #
  # OCaml options
  #
--OCAMLFLAGS[] += -w ae$(if $(OCAML_ACCEPTS_Z_WARNING), z)
-+OCAMLFLAGS[] += -w Ae$(if $(OCAML_ACCEPTS_Z_WARNING), z)
+-OCAMLFLAGS[] += -w Ae$(if $(OCAML_ACCEPTS_Z_WARNING), z)
++OCAMLFLAGS[] += -w ae$(if $(OCAML_ACCEPTS_Z_WARNING), z)
  if $(THREADS_ENABLED)
      OCAMLFLAGS += -thread
      export
