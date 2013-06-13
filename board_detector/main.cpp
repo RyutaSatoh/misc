@@ -3,7 +3,7 @@
 
 bool getPictureFileName(std::string& fileName, int index) {
   char buf[255];
-  sprintf(buf, "./bijin/%d.jpg", index);
+  sprintf(buf, "./temp/%d.jpg", index);
   fileName = buf;
   return true;
 }
