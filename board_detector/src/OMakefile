@@ -1,0 +1,4 @@
+CXXFLAGS += -g -I../include
+
+.DEFAULT: $(StaticCXXLibrary libBoardDetection, BoardDetection)
+

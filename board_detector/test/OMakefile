@@ -1,0 +1,19 @@
+CXXFLAGS += -g -I../include
+
+LIBS += ../src/libBoardDetection
+
+LDFLAGS += /usr/local/Cellar/opencv/2.4.4/lib/libopencv_core.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_highgui.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_imgproc.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_legacy.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_ml.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_nonfree.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_objdetect.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_photo.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_stitching.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_ts.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_video.dylib \
+	/usr/local/Cellar/opencv/2.4.4/lib/libopencv_videostab.dylib \
+	-lstdc++
+
+.DEFAULT: $(CProgram test, test)
