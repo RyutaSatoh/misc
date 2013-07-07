@@ -21,9 +21,10 @@ int main(int argc, char* argv) {
   for (int i=1; i<10; i++) {
     std::string fileName;
     getPictureFileName(fileName, i);
-
+    cv::RotatedRect bb;
     std::cout << fileName << std::endl;
 
+    // デバッグ表示用
     try {
       input = cv::imread(fileName);
     }
@@ -31,26 +32,15 @@ int main(int argc, char* argv) {
       break;
     }
 
-    cv::Mat black = cv::Mat(input.rows, input.cols, CV_8UC1);
-    cv::Mat filtered = cv::Mat(input.rows, input.cols, CV_8UC1);
-    
-    getBlackRegion(input, black);
-    preprocess(black, filtered);
+    // 黒板領域抽出
+    findBlackBoardRegion(fileName, bb);
 
-    // cv::imshow(inputWindow, black);
-    // cv::waitKey(0);
-
-    // cv::imshow(inputWindow, filtered);
-    // cv::waitKey(0);
-    cv::RotatedRect bb;
-    findConvexHullOfBlackBoard(filtered, black, bb);
-    printf("%lf %lf\n", bb.size.width, bb.size.height);
-
+    // 黒板領域描画
     if (!(bb.size.width == 0 || bb.size.height == 0)) {
       cv::Point2f vtx[4];
       bb.points(vtx);
       for(int i=0; i<4; ++i)
-        cv::line(input, vtx[i], vtx[i<3?i+1:0], cv::Scalar(255, 0, 0), 2, CV_AA);
+        cv::line(input, vtx[i], vtx[(i+1)%4], cv::Scalar(255, 0, 0), 2, CV_AA);
 
       printf("%5.2f\n", (float)bb.size.width / bb.size.height);
       printf("%5.2f\n", bb.size.height / (float)bb.size.width);

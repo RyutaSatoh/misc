@@ -104,7 +104,6 @@ namespace BoardDetection {
             ((1.1 < aspect1 && aspect1 < 1.5) ||
              (1.1 < aspect2 && aspect2 < 1.5))) {
 
-          printf("area: %lf\n", hullArea);
           result = bb;
           break;
         }
@@ -115,5 +114,31 @@ namespace BoardDetection {
 
     return true;
   }
+
+  bool findBlackBoardRegion(const std::string& srcFileName, cv::RotatedRect& result) {
+    // 入力画像
+    cv::Mat input = cv::imread(srcFileName);
+
+    // 黒板領域画像(処理前)
+    cv::Mat black = cv::Mat(input.rows, input.cols, CV_8UC1);
+    // 黒板領域画像(処理後)
+    cv::Mat filtered = cv::Mat(input.rows, input.cols, CV_8UC1);
+
+    // 黒色領域抽出
+    getBlackRegion(input, black);
+    // 黒色領域に対する前処理
+    preprocess(black, filtered);
+
+    // 黒板領域検出
+    findConvexHullOfBlackBoard(filtered, black, result);
+
+    // 領域の大きさを縮める
+    const float blackBoardScale = 1.0;
+    result.size.width *= blackBoardScale;
+    result.size.height *= blackBoardScale;
+    
+    return true;
+  }
+
 
 }

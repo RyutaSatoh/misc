@@ -33,7 +33,7 @@
 # If so, define the subdirectory targets and uncomment this section.
 #
 
-# .SUBDIRS: src test
+.SUBDIRS: src test
 
 ########################################################################
 # C configuration.

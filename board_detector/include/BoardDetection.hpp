@@ -2,6 +2,7 @@
 #define __BOARD_DETECTION_HPP__
 
 #include <opencv2/opencv.hpp>
+#include <string>
 #include <stdio.h>
 
 namespace BoardDetection {
@@ -26,6 +27,13 @@ namespace BoardDetection {
    * @param result 結果のOBB
    */
   bool findConvexHullOfBlackBoard(const cv::Mat& src, cv::Mat& dst, cv::RotatedRect& result);
+
+  /**
+   * ファイル名から黒板領域を得る
+   * @param srcFileName 入力ファイル名(パス)
+   * @param result 結果のOBB
+   */
+  bool findBlackBoardRegion(const std::string& srcFileName, cv::RotatedRect& result);
 }
 
 #endif // __BOARD_DETECTION_HPP__
